@@ -31,4 +31,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-prod-job
     steps:
-      - run: echo "auto-deploy-job works!"
+      - name: download production build artifacts
+        uses: actions/download-artifact@v5
+        with:
+          name: dist-production
+          path: dist
+      - run: ls dist
