@@ -24,8 +24,8 @@ jobs:
      runs-on: ubuntu-latest
      env:
        SERVER_IP: '157.90.230.179'
-       SERVER_USERNAME: 'root'
-       SERVER_PASSWORD: 'bF9NN4xqsbmb'
+       SERVER_USERNAME: ${{secrets.SERVER_USERNAME}}
+       SERVER_PASSWORD: ${{secrets.SERVER_PASSWORD}}
        CONTAINER_NAME: ${{github.actor}}
        SERVER_PORT: 9022
        DOCKER_IMAGE_URL: 'ghcr.io/${{ github.repository }}:${{ github.ref_name }}'
