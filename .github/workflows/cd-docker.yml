@@ -18,3 +18,24 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+  auto-deploy-docker-job:
+     needs: build-docker-image
+     runs-on: ubuntu-latest
+     env:
+       SERVER_IP: '157.90.230.179'
+       SERVER_USERNAME: 'root'
+       SERVER_PASSWORD: 'bF9NN4xqsbmb'
+       CONTAINER_NAME: ${{github.actor}}
+       SERVER_PORT: 9022
+       DOCKER_IMAGE_URL: 'ghcr.io/${{ github.repository }}:${{ github.ref_name }}'
+     steps:
+      - name: Execute deployment script
+        uses: appleboy/ssh-action@v1.2.3
+        with:
+          host: ${{ env.SERVER_IP }}
+          username: ${{ env.SERVER_USERNAME }}
+          password: ${{ env.SERVER_PASSWORD }}
+          port: '22'
+          script: |
+            docker -V
