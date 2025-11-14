@@ -28,7 +28,7 @@ jobs:
        SERVER_PASSWORD: ${{secrets.SERVER_PASSWORD}}
        CONTAINER_NAME: ${{github.actor}}
        SERVER_PORT: 9022
-       DOCKER_IMAGE_URL: 'ghcr.io/${{ github.repository }}:${{ github.ref_name }}'
+       DOCKER_IMAGE_URL: 'ghcr.io/${{github.actor}}/${{github.event.repository.name}}:${{github.ref_name}}'
      steps:
       - name: Execute deployment script
         uses: appleboy/ssh-action@v1.2.3
